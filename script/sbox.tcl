@@ -1,7 +1,7 @@
 set target_library  { /app6/synopsys/syn/S-2021.06-SP4/libraries/syn/gtech.db }
 set link_library    { /app6/synopsys/syn/S-2021.06-SP4/libraries/syn/gtech.db }
 
-set design sbox
+set design ./src/sbox
 read_verilog  $design.v
 
 link

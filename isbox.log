@@ -1,0 +1,1028 @@
+
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+
+               Version S-2021.06-SP4 for linux64 - Nov 23, 2021 
+
+                    Copyright (c) 1988 - 2021 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+Initializing...
+set target_library  { /app6/synopsys/syn/S-2021.06-SP4/libraries/syn/gtech.db }
+ /app6/synopsys/syn/S-2021.06-SP4/libraries/syn/gtech.db 
+set link_library    { /app6/synopsys/syn/S-2021.06-SP4/libraries/syn/gtech.db }
+ /app6/synopsys/syn/S-2021.06-SP4/libraries/syn/gtech.db 
+set design isbox
+isbox
+read_verilog  $design.v
+Loading db file '/app6/synopsys/syn/S-2021.06-SP4/libraries/syn/gtech.db'
+Loading db file '/app6/synopsys/syn/S-2021.06-SP4/libraries/syn/standard.sldb'
+  Loading link library 'gtech'
+Loading verilog file '/net/marysrock.ece.Virginia.EDU/maryisan/users/uab9qt/worktable/AES-sbox-logic/isbox.v'
+Detecting input file type automatically (-rtl or -netlist).
+Reading with Presto HDL Compiler (equivalent to -rtl option).
+Running PRESTO HDLC
+Compiling source file /net/marysrock.ece.Virginia.EDU/maryisan/users/uab9qt/worktable/AES-sbox-logic/isbox.v
+Warning:  /net/marysrock.ece.Virginia.EDU/maryisan/users/uab9qt/worktable/AES-sbox-logic/isbox.v:4: DEFAULT branch of CASE statement cannot be reached. (ELAB-311)
+
+Statistics for case statements in always block at line 3 in file
+	'/net/marysrock.ece.Virginia.EDU/maryisan/users/uab9qt/worktable/AES-sbox-logic/isbox.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            4             |    auto/auto     |
+===============================================
+Presto compilation completed successfully.
+Current design is now '/net/marysrock.ece.Virginia.EDU/maryisan/users/uab9qt/worktable/AES-sbox-logic/isbox.db:isbox'
+Loaded 1 design.
+Current design is 'isbox'.
+isbox
+link
+
+  Linking design 'isbox'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+
+1
+check_design
+1
+proc enable_logic { name } {
+  echo "Enable logic: " $name
+  remove_attribute gtech/GTECH_$name dont_use
+}
+proc config_nor {} {
+  echo "Config NOR"
+  enable_logic NOR2
+  enable_logic NOT
+}
+proc config_simdram {} {
+  echo "Config SIMDRAM"
+  enable_logic MAJ23
+  enable_logic NOT
+  enable_logic AND2
+  enable_logic OR2
+}
+proc config_ap {} {
+  echo "Config AP"
+  enable_logic XNOR2
+  enable_logic AND2
+  enable_logic MUX2
+  enable_logic NOT
+  enable_logic OR2
+}
+proc config_drisa_nor {} {
+  echo "Config DRISA-nor"
+  enable_logic NOR2
+  enable_logic NOT
+}
+proc config_drisa_mixed {} {
+  echo "Config DRISA-mixed"
+  enable_logic NAND2
+  enable_logic NOR2
+  enable_logic XNOR2
+  enable_logic NOT
+}
+proc config_bitsimd {} {
+  echo "Config BitSIMD"
+  enable_logic NOT
+  enable_logic AND2
+  enable_logic OR2
+  enable_logic XOR2
+  enable_logic MUX2
+}
+echo "Total libcells: " [sizeof_collection [get_lib_cells */*]]
+Total libcells:  100
+set_dont_use [get_lib_cells */*]
+1
+echo "Total Dont-use libcells: " [sizeof_collection [get_lib_cells */* -filter "dont_use==true"]]
+Total Dont-use libcells:  100
+config_ap
+Config AP
+Enable logic:  XNOR2
+Enable logic:  AND2
+Enable logic:  MUX2
+Enable logic:  NOT
+Enable logic:  OR2
+gtech/GTECH_OR2
+echo "Dont-use libcells: " [sizeof_collection [get_lib_cells */* -filter "dont_use==true"]]
+Dont-use libcells:  95
+compile -exact_map
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | S-2021.06-DWBB_202106.4 |     *     |
+| Licensed DW Building Blocks        |                         |           |
+============================================================================
+
+============================================================================
+| Flow Information                                                         |
+----------------------------------------------------------------------------
+| Flow         | Design Compiler                                           |
+============================================================================
+| Design Information                                      | Value          |
+============================================================================
+| Number of Scenarios                                     | 0              |
+| Leaf Cell Count                                         | 874            |
+| Number of User Hierarchies                              | 0              |
+| Sequential Cell Count                                   | 0              |
+| Macro Count                                             | 0              |
+| Number of Power Domains                                 | 0              |
+| Design with UPF Data                                    | false          |
+============================================================================
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'isbox'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: Design 'isbox' has no optimization constraints set. (OPT-108)
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+  Structuring 'isbox'
+  Mapping 'isbox'
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+                                  TOTAL                                      
+   ELAPSED            WORST NEG   SETUP    DESIGN                            
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT         
+  --------- --------- --------- --------- --------- -------------------------
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+    0:00:04       0.0      0.00       0.0       0.0                          
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+1
+change_names -rule verilog
+1
+write -hierarchy -format verilog -output $design.compiled.v
+Writing verilog file '/net/marysrock.ece.Virginia.EDU/maryisan/users/uab9qt/worktable/AES-sbox-logic/isbox.compiled.v'.
+1
+report_cell [get_cells]
+Information: Updating graph... (UID-83)
+ 
+****************************************
+Report : cell
+Design : isbox
+Version: S-2021.06-SP4
+Date   : Tue Jul 23 09:29:23 2024
+****************************************
+
+Attributes:
+    b - black box (unknown)
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    u - contains unmapped logic
+
+Cell                      Reference       Library             Area  Attributes
+--------------------------------------------------------------------------------
+U737                      GTECH_OR2       gtech           0.000000  u
+U738                      GTECH_OR2       gtech           0.000000  u
+U739                      GTECH_OR2       gtech           0.000000  u
+U740                      GTECH_OR2       gtech           0.000000  u
+U741                      GTECH_OR2       gtech           0.000000  u
+U742                      GTECH_OR2       gtech           0.000000  u
+U743                      GTECH_AND2      gtech           0.000000  u
+U744                      GTECH_OR2       gtech           0.000000  u
+U745                      GTECH_AND2      gtech           0.000000  u
+U746                      GTECH_AND2      gtech           0.000000  u
+U747                      GTECH_OR2       gtech           0.000000  u
+U748                      GTECH_OR2       gtech           0.000000  u
+U749                      GTECH_OR2       gtech           0.000000  u
+U750                      GTECH_AND2      gtech           0.000000  u
+U751                      GTECH_AND2      gtech           0.000000  u
+U752                      GTECH_AND2      gtech           0.000000  u
+U753                      GTECH_OR2       gtech           0.000000  u
+U754                      GTECH_OR2       gtech           0.000000  u
+U755                      GTECH_AND2      gtech           0.000000  u
+U756                      GTECH_AND2      gtech           0.000000  u
+U757                      GTECH_OR2       gtech           0.000000  u
+U758                      GTECH_AND2      gtech           0.000000  u
+U759                      GTECH_AND2      gtech           0.000000  u
+U760                      GTECH_OR2       gtech           0.000000  u
+U761                      GTECH_OR2       gtech           0.000000  u
+U762                      GTECH_OR2       gtech           0.000000  u
+U763                      GTECH_OR2       gtech           0.000000  u
+U764                      GTECH_OR2       gtech           0.000000  u
+U765                      GTECH_OR2       gtech           0.000000  u
+U766                      GTECH_OR2       gtech           0.000000  u
+U767                      GTECH_OR2       gtech           0.000000  u
+U768                      GTECH_OR2       gtech           0.000000  u
+U769                      GTECH_OR2       gtech           0.000000  u
+U770                      GTECH_OR2       gtech           0.000000  u
+U771                      GTECH_OR2       gtech           0.000000  u
+U772                      GTECH_AND2      gtech           0.000000  u
+U773                      GTECH_AND2      gtech           0.000000  u
+U774                      GTECH_AND2      gtech           0.000000  u
+U775                      GTECH_OR2       gtech           0.000000  u
+U776                      GTECH_OR2       gtech           0.000000  u
+U777                      GTECH_OR2       gtech           0.000000  u
+U778                      GTECH_AND2      gtech           0.000000  u
+U779                      GTECH_AND2      gtech           0.000000  u
+U780                      GTECH_OR2       gtech           0.000000  u
+U781                      GTECH_AND2      gtech           0.000000  u
+U782                      GTECH_OR2       gtech           0.000000  u
+U783                      GTECH_OR2       gtech           0.000000  u
+U784                      GTECH_AND2      gtech           0.000000  u
+U785                      GTECH_OR2       gtech           0.000000  u
+U786                      GTECH_AND2      gtech           0.000000  u
+U787                      GTECH_OR2       gtech           0.000000  u
+U788                      GTECH_AND2      gtech           0.000000  u
+U789                      GTECH_OR2       gtech           0.000000  u
+U790                      GTECH_AND2      gtech           0.000000  u
+U791                      GTECH_OR2       gtech           0.000000  u
+U792                      GTECH_AND2      gtech           0.000000  u
+U793                      GTECH_OR2       gtech           0.000000  u
+U794                      GTECH_OR2       gtech           0.000000  u
+U795                      GTECH_OR2       gtech           0.000000  u
+U796                      GTECH_AND2      gtech           0.000000  u
+U797                      GTECH_AND2      gtech           0.000000  u
+U798                      GTECH_AND2      gtech           0.000000  u
+U799                      GTECH_OR2       gtech           0.000000  u
+U800                      GTECH_OR2       gtech           0.000000  u
+U801                      GTECH_AND2      gtech           0.000000  u
+U802                      GTECH_AND2      gtech           0.000000  u
+U803                      GTECH_OR2       gtech           0.000000  u
+U804                      GTECH_AND2      gtech           0.000000  u
+U805                      GTECH_OR2       gtech           0.000000  u
+U806                      GTECH_AND2      gtech           0.000000  u
+U807                      GTECH_OR2       gtech           0.000000  u
+U808                      GTECH_OR2       gtech           0.000000  u
+U809                      GTECH_OR2       gtech           0.000000  u
+U810                      GTECH_OR2       gtech           0.000000  u
+U811                      GTECH_OR2       gtech           0.000000  u
+U812                      GTECH_OR2       gtech           0.000000  u
+U813                      GTECH_OR2       gtech           0.000000  u
+U814                      GTECH_AND2      gtech           0.000000  u
+U815                      GTECH_AND2      gtech           0.000000  u
+U816                      GTECH_OR2       gtech           0.000000  u
+U817                      GTECH_OR2       gtech           0.000000  u
+U818                      GTECH_OR2       gtech           0.000000  u
+U819                      GTECH_AND2      gtech           0.000000  u
+U820                      GTECH_AND2      gtech           0.000000  u
+U821                      GTECH_AND2      gtech           0.000000  u
+U822                      GTECH_OR2       gtech           0.000000  u
+U823                      GTECH_OR2       gtech           0.000000  u
+U824                      GTECH_AND2      gtech           0.000000  u
+U825                      GTECH_AND2      gtech           0.000000  u
+U826                      GTECH_OR2       gtech           0.000000  u
+U827                      GTECH_AND2      gtech           0.000000  u
+U828                      GTECH_AND2      gtech           0.000000  u
+U829                      GTECH_OR2       gtech           0.000000  u
+U830                      GTECH_OR2       gtech           0.000000  u
+U831                      GTECH_OR2       gtech           0.000000  u
+U832                      GTECH_OR2       gtech           0.000000  u
+U833                      GTECH_OR2       gtech           0.000000  u
+U834                      GTECH_OR2       gtech           0.000000  u
+U835                      GTECH_OR2       gtech           0.000000  u
+U836                      GTECH_AND2      gtech           0.000000  u
+U837                      GTECH_AND2      gtech           0.000000  u
+U838                      GTECH_OR2       gtech           0.000000  u
+U839                      GTECH_AND2      gtech           0.000000  u
+U840                      GTECH_AND2      gtech           0.000000  u
+U841                      GTECH_OR2       gtech           0.000000  u
+U842                      GTECH_OR2       gtech           0.000000  u
+U843                      GTECH_AND2      gtech           0.000000  u
+U844                      GTECH_AND2      gtech           0.000000  u
+U845                      GTECH_OR2       gtech           0.000000  u
+U846                      GTECH_OR2       gtech           0.000000  u
+U847                      GTECH_AND2      gtech           0.000000  u
+U848                      GTECH_OR2       gtech           0.000000  u
+U849                      GTECH_AND2      gtech           0.000000  u
+U850                      GTECH_OR2       gtech           0.000000  u
+U851                      GTECH_OR2       gtech           0.000000  u
+U852                      GTECH_AND2      gtech           0.000000  u
+U853                      GTECH_OR2       gtech           0.000000  u
+U854                      GTECH_OR2       gtech           0.000000  u
+U855                      GTECH_OR2       gtech           0.000000  u
+U856                      GTECH_OR2       gtech           0.000000  u
+U857                      GTECH_AND2      gtech           0.000000  u
+U858                      GTECH_AND2      gtech           0.000000  u
+U859                      GTECH_OR2       gtech           0.000000  u
+U860                      GTECH_AND2      gtech           0.000000  u
+U861                      GTECH_AND2      gtech           0.000000  u
+U862                      GTECH_OR2       gtech           0.000000  u
+U863                      GTECH_OR2       gtech           0.000000  u
+U864                      GTECH_AND2      gtech           0.000000  u
+U865                      GTECH_AND2      gtech           0.000000  u
+U866                      GTECH_OR2       gtech           0.000000  u
+U867                      GTECH_OR2       gtech           0.000000  u
+U868                      GTECH_AND2      gtech           0.000000  u
+U869                      GTECH_AND2      gtech           0.000000  u
+U870                      GTECH_OR2       gtech           0.000000  u
+U871                      GTECH_AND2      gtech           0.000000  u
+U872                      GTECH_OR2       gtech           0.000000  u
+U873                      GTECH_OR2       gtech           0.000000  u
+U874                      GTECH_OR2       gtech           0.000000  u
+U875                      GTECH_OR2       gtech           0.000000  u
+U876                      GTECH_OR2       gtech           0.000000  u
+U877                      GTECH_OR2       gtech           0.000000  u
+U878                      GTECH_AND2      gtech           0.000000  u
+U879                      GTECH_AND2      gtech           0.000000  u
+U880                      GTECH_OR2       gtech           0.000000  u
+U881                      GTECH_AND2      gtech           0.000000  u
+U882                      GTECH_AND2      gtech           0.000000  u
+U883                      GTECH_OR2       gtech           0.000000  u
+U884                      GTECH_OR2       gtech           0.000000  u
+U885                      GTECH_AND2      gtech           0.000000  u
+U886                      GTECH_AND2      gtech           0.000000  u
+U887                      GTECH_OR2       gtech           0.000000  u
+U888                      GTECH_OR2       gtech           0.000000  u
+U889                      GTECH_AND2      gtech           0.000000  u
+U890                      GTECH_OR2       gtech           0.000000  u
+U891                      GTECH_AND2      gtech           0.000000  u
+U892                      GTECH_OR2       gtech           0.000000  u
+U893                      GTECH_AND2      gtech           0.000000  u
+U894                      GTECH_OR2       gtech           0.000000  u
+U895                      GTECH_OR2       gtech           0.000000  u
+U896                      GTECH_AND2      gtech           0.000000  u
+U897                      GTECH_OR2       gtech           0.000000  u
+U898                      GTECH_AND2      gtech           0.000000  u
+U899                      GTECH_OR2       gtech           0.000000  u
+U900                      GTECH_OR2       gtech           0.000000  u
+U901                      GTECH_OR2       gtech           0.000000  u
+U902                      GTECH_AND2      gtech           0.000000  u
+U903                      GTECH_AND2      gtech           0.000000  u
+U904                      GTECH_OR2       gtech           0.000000  u
+U905                      GTECH_OR2       gtech           0.000000  u
+U906                      GTECH_AND2      gtech           0.000000  u
+U907                      GTECH_OR2       gtech           0.000000  u
+U908                      GTECH_AND2      gtech           0.000000  u
+U909                      GTECH_OR2       gtech           0.000000  u
+U910                      GTECH_OR2       gtech           0.000000  u
+U911                      GTECH_AND2      gtech           0.000000  u
+U912                      GTECH_OR2       gtech           0.000000  u
+U913                      GTECH_AND2      gtech           0.000000  u
+U914                      GTECH_OR2       gtech           0.000000  u
+U915                      GTECH_OR2       gtech           0.000000  u
+U916                      GTECH_OR2       gtech           0.000000  u
+U917                      GTECH_OR2       gtech           0.000000  u
+U918                      GTECH_OR2       gtech           0.000000  u
+U919                      GTECH_OR2       gtech           0.000000  u
+U920                      GTECH_OR2       gtech           0.000000  u
+U921                      GTECH_OR2       gtech           0.000000  u
+U922                      GTECH_AND2      gtech           0.000000  u
+U923                      GTECH_OR2       gtech           0.000000  u
+U924                      GTECH_OR2       gtech           0.000000  u
+U925                      GTECH_AND2      gtech           0.000000  u
+U926                      GTECH_AND2      gtech           0.000000  u
+U927                      GTECH_AND2      gtech           0.000000  u
+U928                      GTECH_OR2       gtech           0.000000  u
+U929                      GTECH_OR2       gtech           0.000000  u
+U930                      GTECH_AND2      gtech           0.000000  u
+U931                      GTECH_AND2      gtech           0.000000  u
+U932                      GTECH_OR2       gtech           0.000000  u
+U933                      GTECH_OR2       gtech           0.000000  u
+U934                      GTECH_OR2       gtech           0.000000  u
+U935                      GTECH_AND2      gtech           0.000000  u
+U936                      GTECH_OR2       gtech           0.000000  u
+U937                      GTECH_AND2      gtech           0.000000  u
+U938                      GTECH_OR2       gtech           0.000000  u
+U939                      GTECH_AND2      gtech           0.000000  u
+U940                      GTECH_OR2       gtech           0.000000  u
+U941                      GTECH_OR2       gtech           0.000000  u
+U942                      GTECH_OR2       gtech           0.000000  u
+U943                      GTECH_OR2       gtech           0.000000  u
+U944                      GTECH_AND2      gtech           0.000000  u
+U945                      GTECH_AND2      gtech           0.000000  u
+U946                      GTECH_OR2       gtech           0.000000  u
+U947                      GTECH_AND2      gtech           0.000000  u
+U948                      GTECH_AND2      gtech           0.000000  u
+U949                      GTECH_OR2       gtech           0.000000  u
+U950                      GTECH_OR2       gtech           0.000000  u
+U951                      GTECH_AND2      gtech           0.000000  u
+U952                      GTECH_OR2       gtech           0.000000  u
+U953                      GTECH_AND2      gtech           0.000000  u
+U954                      GTECH_OR2       gtech           0.000000  u
+U955                      GTECH_OR2       gtech           0.000000  u
+U956                      GTECH_AND2      gtech           0.000000  u
+U957                      GTECH_OR2       gtech           0.000000  u
+U958                      GTECH_AND2      gtech           0.000000  u
+U959                      GTECH_OR2       gtech           0.000000  u
+U960                      GTECH_OR2       gtech           0.000000  u
+U961                      GTECH_OR2       gtech           0.000000  u
+U962                      GTECH_OR2       gtech           0.000000  u
+U963                      GTECH_OR2       gtech           0.000000  u
+U964                      GTECH_OR2       gtech           0.000000  u
+U965                      GTECH_OR2       gtech           0.000000  u
+U966                      GTECH_OR2       gtech           0.000000  u
+U967                      GTECH_AND2      gtech           0.000000  u
+U968                      GTECH_AND2      gtech           0.000000  u
+U969                      GTECH_OR2       gtech           0.000000  u
+U970                      GTECH_OR2       gtech           0.000000  u
+U971                      GTECH_AND2      gtech           0.000000  u
+U972                      GTECH_AND2      gtech           0.000000  u
+U973                      GTECH_OR2       gtech           0.000000  u
+U974                      GTECH_OR2       gtech           0.000000  u
+U975                      GTECH_OR2       gtech           0.000000  u
+U976                      GTECH_AND2      gtech           0.000000  u
+U977                      GTECH_AND2      gtech           0.000000  u
+U978                      GTECH_AND2      gtech           0.000000  u
+U979                      GTECH_OR2       gtech           0.000000  u
+U980                      GTECH_OR2       gtech           0.000000  u
+U981                      GTECH_AND2      gtech           0.000000  u
+U982                      GTECH_AND2      gtech           0.000000  u
+U983                      GTECH_OR2       gtech           0.000000  u
+U984                      GTECH_AND2      gtech           0.000000  u
+U985                      GTECH_OR2       gtech           0.000000  u
+U986                      GTECH_OR2       gtech           0.000000  u
+U987                      GTECH_OR2       gtech           0.000000  u
+U988                      GTECH_AND2      gtech           0.000000  u
+U989                      GTECH_AND2      gtech           0.000000  u
+U990                      GTECH_OR2       gtech           0.000000  u
+U991                      GTECH_AND2      gtech           0.000000  u
+U992                      GTECH_AND2      gtech           0.000000  u
+U993                      GTECH_OR2       gtech           0.000000  u
+U994                      GTECH_OR2       gtech           0.000000  u
+U995                      GTECH_AND2      gtech           0.000000  u
+U996                      GTECH_OR2       gtech           0.000000  u
+U997                      GTECH_AND2      gtech           0.000000  u
+U998                      GTECH_OR2       gtech           0.000000  u
+U999                      GTECH_OR2       gtech           0.000000  u
+U1000                     GTECH_OR2       gtech           0.000000  u
+U1001                     GTECH_AND2      gtech           0.000000  u
+U1002                     GTECH_OR2       gtech           0.000000  u
+U1003                     GTECH_AND2      gtech           0.000000  u
+U1004                     GTECH_OR2       gtech           0.000000  u
+U1005                     GTECH_OR2       gtech           0.000000  u
+U1006                     GTECH_OR2       gtech           0.000000  u
+U1007                     GTECH_AND2      gtech           0.000000  u
+U1008                     GTECH_OR2       gtech           0.000000  u
+U1009                     GTECH_OR2       gtech           0.000000  u
+U1010                     GTECH_OR2       gtech           0.000000  u
+U1011                     GTECH_AND2      gtech           0.000000  u
+U1012                     GTECH_AND2      gtech           0.000000  u
+U1013                     GTECH_OR2       gtech           0.000000  u
+U1014                     GTECH_AND2      gtech           0.000000  u
+U1015                     GTECH_AND2      gtech           0.000000  u
+U1016                     GTECH_OR2       gtech           0.000000  u
+U1017                     GTECH_OR2       gtech           0.000000  u
+U1018                     GTECH_OR2       gtech           0.000000  u
+U1019                     GTECH_AND2      gtech           0.000000  u
+U1020                     GTECH_OR2       gtech           0.000000  u
+U1021                     GTECH_AND2      gtech           0.000000  u
+U1022                     GTECH_OR2       gtech           0.000000  u
+U1023                     GTECH_OR2       gtech           0.000000  u
+U1024                     GTECH_AND2      gtech           0.000000  u
+U1025                     GTECH_OR2       gtech           0.000000  u
+U1026                     GTECH_AND2      gtech           0.000000  u
+U1027                     GTECH_OR2       gtech           0.000000  u
+U1028                     GTECH_OR2       gtech           0.000000  u
+U1029                     GTECH_OR2       gtech           0.000000  u
+U1030                     GTECH_OR2       gtech           0.000000  u
+U1031                     GTECH_AND2      gtech           0.000000  u
+U1032                     GTECH_AND2      gtech           0.000000  u
+U1033                     GTECH_OR2       gtech           0.000000  u
+U1034                     GTECH_OR2       gtech           0.000000  u
+U1035                     GTECH_AND2      gtech           0.000000  u
+U1036                     GTECH_OR2       gtech           0.000000  u
+U1037                     GTECH_AND2      gtech           0.000000  u
+U1038                     GTECH_OR2       gtech           0.000000  u
+U1039                     GTECH_AND2      gtech           0.000000  u
+U1040                     GTECH_OR2       gtech           0.000000  u
+U1041                     GTECH_OR2       gtech           0.000000  u
+U1042                     GTECH_OR2       gtech           0.000000  u
+U1043                     GTECH_AND2      gtech           0.000000  u
+U1044                     GTECH_AND2      gtech           0.000000  u
+U1045                     GTECH_OR2       gtech           0.000000  u
+U1046                     GTECH_OR2       gtech           0.000000  u
+U1047                     GTECH_OR2       gtech           0.000000  u
+U1048                     GTECH_AND2      gtech           0.000000  u
+U1049                     GTECH_AND2      gtech           0.000000  u
+U1050                     GTECH_OR2       gtech           0.000000  u
+U1051                     GTECH_OR2       gtech           0.000000  u
+U1052                     GTECH_AND2      gtech           0.000000  u
+U1053                     GTECH_OR2       gtech           0.000000  u
+U1054                     GTECH_OR2       gtech           0.000000  u
+U1055                     GTECH_AND2      gtech           0.000000  u
+U1056                     GTECH_AND2      gtech           0.000000  u
+U1057                     GTECH_OR2       gtech           0.000000  u
+U1058                     GTECH_OR2       gtech           0.000000  u
+U1059                     GTECH_AND2      gtech           0.000000  u
+U1060                     GTECH_OR2       gtech           0.000000  u
+U1061                     GTECH_AND2      gtech           0.000000  u
+U1062                     GTECH_OR2       gtech           0.000000  u
+U1063                     GTECH_AND2      gtech           0.000000  u
+U1064                     GTECH_OR2       gtech           0.000000  u
+U1065                     GTECH_OR2       gtech           0.000000  u
+U1066                     GTECH_OR2       gtech           0.000000  u
+U1067                     GTECH_AND2      gtech           0.000000  u
+U1068                     GTECH_AND2      gtech           0.000000  u
+U1069                     GTECH_OR2       gtech           0.000000  u
+U1070                     GTECH_AND2      gtech           0.000000  u
+U1071                     GTECH_OR2       gtech           0.000000  u
+U1072                     GTECH_OR2       gtech           0.000000  u
+U1073                     GTECH_AND2      gtech           0.000000  u
+U1074                     GTECH_OR2       gtech           0.000000  u
+U1075                     GTECH_AND2      gtech           0.000000  u
+U1076                     GTECH_OR2       gtech           0.000000  u
+U1077                     GTECH_OR2       gtech           0.000000  u
+U1078                     GTECH_AND2      gtech           0.000000  u
+U1079                     GTECH_OR2       gtech           0.000000  u
+U1080                     GTECH_OR2       gtech           0.000000  u
+U1081                     GTECH_OR2       gtech           0.000000  u
+U1082                     GTECH_OR2       gtech           0.000000  u
+U1083                     GTECH_OR2       gtech           0.000000  u
+U1084                     GTECH_OR2       gtech           0.000000  u
+U1085                     GTECH_OR2       gtech           0.000000  u
+U1086                     GTECH_AND2      gtech           0.000000  u
+U1087                     GTECH_AND2      gtech           0.000000  u
+U1088                     GTECH_OR2       gtech           0.000000  u
+U1089                     GTECH_OR2       gtech           0.000000  u
+U1090                     GTECH_OR2       gtech           0.000000  u
+U1091                     GTECH_OR2       gtech           0.000000  u
+U1092                     GTECH_OR2       gtech           0.000000  u
+U1093                     GTECH_OR2       gtech           0.000000  u
+U1094                     GTECH_AND2      gtech           0.000000  u
+U1095                     GTECH_AND2      gtech           0.000000  u
+U1096                     GTECH_OR2       gtech           0.000000  u
+U1097                     GTECH_AND2      gtech           0.000000  u
+U1098                     GTECH_AND2      gtech           0.000000  u
+U1099                     GTECH_OR2       gtech           0.000000  u
+U1100                     GTECH_OR2       gtech           0.000000  u
+U1101                     GTECH_OR2       gtech           0.000000  u
+U1102                     GTECH_AND2      gtech           0.000000  u
+U1103                     GTECH_AND2      gtech           0.000000  u
+U1104                     GTECH_OR2       gtech           0.000000  u
+U1105                     GTECH_AND2      gtech           0.000000  u
+U1106                     GTECH_AND2      gtech           0.000000  u
+U1107                     GTECH_OR2       gtech           0.000000  u
+U1108                     GTECH_OR2       gtech           0.000000  u
+U1109                     GTECH_AND2      gtech           0.000000  u
+U1110                     GTECH_AND2      gtech           0.000000  u
+U1111                     GTECH_OR2       gtech           0.000000  u
+U1112                     GTECH_OR2       gtech           0.000000  u
+U1113                     GTECH_AND2      gtech           0.000000  u
+U1114                     GTECH_OR2       gtech           0.000000  u
+U1115                     GTECH_AND2      gtech           0.000000  u
+U1116                     GTECH_OR2       gtech           0.000000  u
+U1117                     GTECH_OR2       gtech           0.000000  u
+U1118                     GTECH_OR2       gtech           0.000000  u
+U1119                     GTECH_OR2       gtech           0.000000  u
+U1120                     GTECH_AND2      gtech           0.000000  u
+U1121                     GTECH_AND2      gtech           0.000000  u
+U1122                     GTECH_AND2      gtech           0.000000  u
+U1123                     GTECH_OR2       gtech           0.000000  u
+U1124                     GTECH_OR2       gtech           0.000000  u
+U1125                     GTECH_AND2      gtech           0.000000  u
+U1126                     GTECH_OR2       gtech           0.000000  u
+U1127                     GTECH_AND2      gtech           0.000000  u
+U1128                     GTECH_OR2       gtech           0.000000  u
+U1129                     GTECH_OR2       gtech           0.000000  u
+U1130                     GTECH_AND2      gtech           0.000000  u
+U1131                     GTECH_OR2       gtech           0.000000  u
+U1132                     GTECH_OR2       gtech           0.000000  u
+U1133                     GTECH_AND2      gtech           0.000000  u
+U1134                     GTECH_OR2       gtech           0.000000  u
+U1135                     GTECH_OR2       gtech           0.000000  u
+U1136                     GTECH_OR2       gtech           0.000000  u
+U1137                     GTECH_OR2       gtech           0.000000  u
+U1138                     GTECH_OR2       gtech           0.000000  u
+U1139                     GTECH_OR2       gtech           0.000000  u
+U1140                     GTECH_OR2       gtech           0.000000  u
+U1141                     GTECH_OR2       gtech           0.000000  u
+U1142                     GTECH_AND2      gtech           0.000000  u
+U1143                     GTECH_AND2      gtech           0.000000  u
+U1144                     GTECH_OR2       gtech           0.000000  u
+U1145                     GTECH_OR2       gtech           0.000000  u
+U1146                     GTECH_AND2      gtech           0.000000  u
+U1147                     GTECH_AND2      gtech           0.000000  u
+U1148                     GTECH_AND2      gtech           0.000000  u
+U1149                     GTECH_OR2       gtech           0.000000  u
+U1150                     GTECH_OR2       gtech           0.000000  u
+U1151                     GTECH_AND2      gtech           0.000000  u
+U1152                     GTECH_AND2      gtech           0.000000  u
+U1153                     GTECH_OR2       gtech           0.000000  u
+U1154                     GTECH_OR2       gtech           0.000000  u
+U1155                     GTECH_OR2       gtech           0.000000  u
+U1156                     GTECH_AND2      gtech           0.000000  u
+U1157                     GTECH_OR2       gtech           0.000000  u
+U1158                     GTECH_AND2      gtech           0.000000  u
+U1159                     GTECH_OR2       gtech           0.000000  u
+U1160                     GTECH_AND2      gtech           0.000000  u
+U1161                     GTECH_OR2       gtech           0.000000  u
+U1162                     GTECH_OR2       gtech           0.000000  u
+U1163                     GTECH_OR2       gtech           0.000000  u
+U1164                     GTECH_OR2       gtech           0.000000  u
+U1165                     GTECH_OR2       gtech           0.000000  u
+U1166                     GTECH_AND2      gtech           0.000000  u
+U1167                     GTECH_AND2      gtech           0.000000  u
+U1168                     GTECH_OR2       gtech           0.000000  u
+U1169                     GTECH_OR2       gtech           0.000000  u
+U1170                     GTECH_AND2      gtech           0.000000  u
+U1171                     GTECH_AND2      gtech           0.000000  u
+U1172                     GTECH_AND2      gtech           0.000000  u
+U1173                     GTECH_OR2       gtech           0.000000  u
+U1174                     GTECH_OR2       gtech           0.000000  u
+U1175                     GTECH_AND2      gtech           0.000000  u
+U1176                     GTECH_AND2      gtech           0.000000  u
+U1177                     GTECH_OR2       gtech           0.000000  u
+U1178                     GTECH_OR2       gtech           0.000000  u
+U1179                     GTECH_OR2       gtech           0.000000  u
+U1180                     GTECH_AND2      gtech           0.000000  u
+U1181                     GTECH_OR2       gtech           0.000000  u
+U1182                     GTECH_AND2      gtech           0.000000  u
+U1183                     GTECH_OR2       gtech           0.000000  u
+U1184                     GTECH_AND2      gtech           0.000000  u
+U1185                     GTECH_OR2       gtech           0.000000  u
+U1186                     GTECH_OR2       gtech           0.000000  u
+U1187                     GTECH_OR2       gtech           0.000000  u
+U1188                     GTECH_OR2       gtech           0.000000  u
+U1189                     GTECH_OR2       gtech           0.000000  u
+U1190                     GTECH_OR2       gtech           0.000000  u
+U1191                     GTECH_AND2      gtech           0.000000  u
+U1192                     GTECH_AND2      gtech           0.000000  u
+U1193                     GTECH_OR2       gtech           0.000000  u
+U1194                     GTECH_AND2      gtech           0.000000  u
+U1195                     GTECH_AND2      gtech           0.000000  u
+U1196                     GTECH_OR2       gtech           0.000000  u
+U1197                     GTECH_OR2       gtech           0.000000  u
+U1198                     GTECH_AND2      gtech           0.000000  u
+U1199                     GTECH_OR2       gtech           0.000000  u
+U1200                     GTECH_AND2      gtech           0.000000  u
+U1201                     GTECH_OR2       gtech           0.000000  u
+U1202                     GTECH_OR2       gtech           0.000000  u
+U1203                     GTECH_OR2       gtech           0.000000  u
+U1204                     GTECH_AND2      gtech           0.000000  u
+U1205                     GTECH_OR2       gtech           0.000000  u
+U1206                     GTECH_AND2      gtech           0.000000  u
+U1207                     GTECH_OR2       gtech           0.000000  u
+U1208                     GTECH_OR2       gtech           0.000000  u
+U1209                     GTECH_AND2      gtech           0.000000  u
+U1210                     GTECH_OR2       gtech           0.000000  u
+U1211                     GTECH_AND2      gtech           0.000000  u
+U1212                     GTECH_OR2       gtech           0.000000  u
+U1213                     GTECH_AND2      gtech           0.000000  u
+U1214                     GTECH_AND2      gtech           0.000000  u
+U1215                     GTECH_OR2       gtech           0.000000  u
+U1216                     GTECH_OR2       gtech           0.000000  u
+U1217                     GTECH_OR2       gtech           0.000000  u
+U1218                     GTECH_AND2      gtech           0.000000  u
+U1219                     GTECH_AND2      gtech           0.000000  u
+U1220                     GTECH_OR2       gtech           0.000000  u
+U1221                     GTECH_AND2      gtech           0.000000  u
+U1222                     GTECH_AND2      gtech           0.000000  u
+U1223                     GTECH_OR2       gtech           0.000000  u
+U1224                     GTECH_OR2       gtech           0.000000  u
+U1225                     GTECH_OR2       gtech           0.000000  u
+U1226                     GTECH_AND2      gtech           0.000000  u
+U1227                     GTECH_AND2      gtech           0.000000  u
+U1228                     GTECH_OR2       gtech           0.000000  u
+U1229                     GTECH_OR2       gtech           0.000000  u
+U1230                     GTECH_AND2      gtech           0.000000  u
+U1231                     GTECH_OR2       gtech           0.000000  u
+U1232                     GTECH_AND2      gtech           0.000000  u
+U1233                     GTECH_OR2       gtech           0.000000  u
+U1234                     GTECH_OR2       gtech           0.000000  u
+U1235                     GTECH_OR2       gtech           0.000000  u
+U1236                     GTECH_OR2       gtech           0.000000  u
+U1237                     GTECH_OR2       gtech           0.000000  u
+U1238                     GTECH_OR2       gtech           0.000000  u
+U1239                     GTECH_OR2       gtech           0.000000  u
+U1240                     GTECH_OR2       gtech           0.000000  u
+U1241                     GTECH_AND2      gtech           0.000000  u
+U1242                     GTECH_AND2      gtech           0.000000  u
+U1243                     GTECH_OR2       gtech           0.000000  u
+U1244                     GTECH_OR2       gtech           0.000000  u
+U1245                     GTECH_AND2      gtech           0.000000  u
+U1246                     GTECH_AND2      gtech           0.000000  u
+U1247                     GTECH_AND2      gtech           0.000000  u
+U1248                     GTECH_OR2       gtech           0.000000  u
+U1249                     GTECH_OR2       gtech           0.000000  u
+U1250                     GTECH_AND2      gtech           0.000000  u
+U1251                     GTECH_AND2      gtech           0.000000  u
+U1252                     GTECH_OR2       gtech           0.000000  u
+U1253                     GTECH_OR2       gtech           0.000000  u
+U1254                     GTECH_OR2       gtech           0.000000  u
+U1255                     GTECH_AND2      gtech           0.000000  u
+U1256                     GTECH_OR2       gtech           0.000000  u
+U1257                     GTECH_AND2      gtech           0.000000  u
+U1258                     GTECH_OR2       gtech           0.000000  u
+U1259                     GTECH_AND2      gtech           0.000000  u
+U1260                     GTECH_OR2       gtech           0.000000  u
+U1261                     GTECH_OR2       gtech           0.000000  u
+U1262                     GTECH_OR2       gtech           0.000000  u
+U1263                     GTECH_OR2       gtech           0.000000  u
+U1264                     GTECH_AND2      gtech           0.000000  u
+U1265                     GTECH_AND2      gtech           0.000000  u
+U1266                     GTECH_OR2       gtech           0.000000  u
+U1267                     GTECH_AND2      gtech           0.000000  u
+U1268                     GTECH_AND2      gtech           0.000000  u
+U1269                     GTECH_OR2       gtech           0.000000  u
+U1270                     GTECH_OR2       gtech           0.000000  u
+U1271                     GTECH_OR2       gtech           0.000000  u
+U1272                     GTECH_AND2      gtech           0.000000  u
+U1273                     GTECH_OR2       gtech           0.000000  u
+U1274                     GTECH_AND2      gtech           0.000000  u
+U1275                     GTECH_OR2       gtech           0.000000  u
+U1276                     GTECH_OR2       gtech           0.000000  u
+U1277                     GTECH_OR2       gtech           0.000000  u
+U1278                     GTECH_AND2      gtech           0.000000  u
+U1279                     GTECH_OR2       gtech           0.000000  u
+U1280                     GTECH_AND2      gtech           0.000000  u
+U1281                     GTECH_OR2       gtech           0.000000  u
+U1282                     GTECH_AND2      gtech           0.000000  u
+U1283                     GTECH_OR2       gtech           0.000000  u
+U1284                     GTECH_NOT       gtech           0.000000  u
+U1285                     GTECH_AND2      gtech           0.000000  u
+U1286                     GTECH_AND2      gtech           0.000000  u
+U1287                     GTECH_NOT       gtech           0.000000  u
+U1288                     GTECH_OR2       gtech           0.000000  u
+U1289                     GTECH_OR2       gtech           0.000000  u
+U1290                     GTECH_OR2       gtech           0.000000  u
+U1291                     GTECH_OR2       gtech           0.000000  u
+U1292                     GTECH_OR2       gtech           0.000000  u
+U1293                     GTECH_AND2      gtech           0.000000  u
+U1294                     GTECH_AND2      gtech           0.000000  u
+U1295                     GTECH_OR2       gtech           0.000000  u
+U1296                     GTECH_AND2      gtech           0.000000  u
+U1297                     GTECH_AND2      gtech           0.000000  u
+U1298                     GTECH_OR2       gtech           0.000000  u
+U1299                     GTECH_OR2       gtech           0.000000  u
+U1300                     GTECH_OR2       gtech           0.000000  u
+U1301                     GTECH_AND2      gtech           0.000000  u
+U1302                     GTECH_AND2      gtech           0.000000  u
+U1303                     GTECH_OR2       gtech           0.000000  u
+U1304                     GTECH_OR2       gtech           0.000000  u
+U1305                     GTECH_AND2      gtech           0.000000  u
+U1306                     GTECH_OR2       gtech           0.000000  u
+U1307                     GTECH_OR2       gtech           0.000000  u
+U1308                     GTECH_AND2      gtech           0.000000  u
+U1309                     GTECH_OR2       gtech           0.000000  u
+U1310                     GTECH_OR2       gtech           0.000000  u
+U1311                     GTECH_OR2       gtech           0.000000  u
+U1312                     GTECH_OR2       gtech           0.000000  u
+U1313                     GTECH_OR2       gtech           0.000000  u
+U1314                     GTECH_AND2      gtech           0.000000  u
+U1315                     GTECH_AND2      gtech           0.000000  u
+U1316                     GTECH_OR2       gtech           0.000000  u
+U1317                     GTECH_AND2      gtech           0.000000  u
+U1318                     GTECH_AND2      gtech           0.000000  u
+U1319                     GTECH_OR2       gtech           0.000000  u
+U1320                     GTECH_OR2       gtech           0.000000  u
+U1321                     GTECH_AND2      gtech           0.000000  u
+U1322                     GTECH_OR2       gtech           0.000000  u
+U1323                     GTECH_AND2      gtech           0.000000  u
+U1324                     GTECH_OR2       gtech           0.000000  u
+U1325                     GTECH_OR2       gtech           0.000000  u
+U1326                     GTECH_OR2       gtech           0.000000  u
+U1327                     GTECH_OR2       gtech           0.000000  u
+U1328                     GTECH_AND2      gtech           0.000000  u
+U1329                     GTECH_OR2       gtech           0.000000  u
+U1330                     GTECH_AND2      gtech           0.000000  u
+U1331                     GTECH_OR2       gtech           0.000000  u
+U1332                     GTECH_OR2       gtech           0.000000  u
+U1333                     GTECH_OR2       gtech           0.000000  u
+U1334                     GTECH_OR2       gtech           0.000000  u
+U1335                     GTECH_AND2      gtech           0.000000  u
+U1336                     GTECH_AND2      gtech           0.000000  u
+U1337                     GTECH_OR2       gtech           0.000000  u
+U1338                     GTECH_AND2      gtech           0.000000  u
+U1339                     GTECH_OR2       gtech           0.000000  u
+U1340                     GTECH_OR2       gtech           0.000000  u
+U1341                     GTECH_AND2      gtech           0.000000  u
+U1342                     GTECH_OR2       gtech           0.000000  u
+U1343                     GTECH_AND2      gtech           0.000000  u
+U1344                     GTECH_OR2       gtech           0.000000  u
+U1345                     GTECH_OR2       gtech           0.000000  u
+U1346                     GTECH_AND2      gtech           0.000000  u
+U1347                     GTECH_OR2       gtech           0.000000  u
+U1348                     GTECH_AND2      gtech           0.000000  u
+U1349                     GTECH_OR2       gtech           0.000000  u
+U1350                     GTECH_OR2       gtech           0.000000  u
+U1351                     GTECH_NOT       gtech           0.000000  u
+U1352                     GTECH_OR2       gtech           0.000000  u
+U1353                     GTECH_AND2      gtech           0.000000  u
+U1354                     GTECH_NOT       gtech           0.000000  u
+U1355                     GTECH_OR2       gtech           0.000000  u
+U1356                     GTECH_AND2      gtech           0.000000  u
+U1357                     GTECH_OR2       gtech           0.000000  u
+U1358                     GTECH_AND2      gtech           0.000000  u
+U1359                     GTECH_OR2       gtech           0.000000  u
+U1360                     GTECH_AND2      gtech           0.000000  u
+U1361                     GTECH_OR2       gtech           0.000000  u
+U1362                     GTECH_AND2      gtech           0.000000  u
+U1363                     GTECH_NOT       gtech           0.000000  u
+U1364                     GTECH_OR2       gtech           0.000000  u
+U1365                     GTECH_OR2       gtech           0.000000  u
+U1366                     GTECH_AND2      gtech           0.000000  u
+U1367                     GTECH_OR2       gtech           0.000000  u
+U1368                     GTECH_AND2      gtech           0.000000  u
+U1369                     GTECH_AND2      gtech           0.000000  u
+U1370                     GTECH_AND2      gtech           0.000000  u
+U1371                     GTECH_AND2      gtech           0.000000  u
+U1372                     GTECH_AND2      gtech           0.000000  u
+U1373                     GTECH_AND2      gtech           0.000000  u
+U1374                     GTECH_OR2       gtech           0.000000  u
+U1375                     GTECH_AND2      gtech           0.000000  u
+U1376                     GTECH_OR2       gtech           0.000000  u
+U1377                     GTECH_AND2      gtech           0.000000  u
+U1378                     GTECH_NOT       gtech           0.000000  u
+U1379                     GTECH_NOT       gtech           0.000000  u
+U1380                     GTECH_AND2      gtech           0.000000  u
+U1381                     GTECH_OR2       gtech           0.000000  u
+U1382                     GTECH_OR2       gtech           0.000000  u
+U1383                     GTECH_OR2       gtech           0.000000  u
+U1384                     GTECH_AND2      gtech           0.000000  u
+U1385                     GTECH_AND2      gtech           0.000000  u
+U1386                     GTECH_AND2      gtech           0.000000  u
+U1387                     GTECH_NOT       gtech           0.000000  u
+U1388                     GTECH_AND2      gtech           0.000000  u
+U1389                     GTECH_OR2       gtech           0.000000  u
+U1390                     GTECH_OR2       gtech           0.000000  u
+U1391                     GTECH_OR2       gtech           0.000000  u
+U1392                     GTECH_AND2      gtech           0.000000  u
+U1393                     GTECH_NOT       gtech           0.000000  u
+U1394                     GTECH_AND2      gtech           0.000000  u
+U1395                     GTECH_OR2       gtech           0.000000  u
+U1396                     GTECH_NOT       gtech           0.000000  u
+U1397                     GTECH_NOT       gtech           0.000000  u
+U1398                     GTECH_OR2       gtech           0.000000  u
+U1399                     GTECH_OR2       gtech           0.000000  u
+U1400                     GTECH_OR2       gtech           0.000000  u
+U1401                     GTECH_AND2      gtech           0.000000  u
+U1402                     GTECH_OR2       gtech           0.000000  u
+U1403                     GTECH_AND2      gtech           0.000000  u
+U1404                     GTECH_NOT       gtech           0.000000  u
+U1405                     GTECH_OR2       gtech           0.000000  u
+U1406                     GTECH_AND2      gtech           0.000000  u
+U1407                     GTECH_NOT       gtech           0.000000  u
+U1408                     GTECH_OR2       gtech           0.000000  u
+U1409                     GTECH_AND2      gtech           0.000000  u
+U1410                     GTECH_OR2       gtech           0.000000  u
+U1411                     GTECH_OR2       gtech           0.000000  u
+U1412                     GTECH_AND2      gtech           0.000000  u
+U1413                     GTECH_AND2      gtech           0.000000  u
+U1414                     GTECH_AND2      gtech           0.000000  u
+U1415                     GTECH_OR2       gtech           0.000000  u
+U1416                     GTECH_AND2      gtech           0.000000  u
+U1417                     GTECH_OR2       gtech           0.000000  u
+U1418                     GTECH_OR2       gtech           0.000000  u
+U1419                     GTECH_AND2      gtech           0.000000  u
+U1420                     GTECH_OR2       gtech           0.000000  u
+U1421                     GTECH_NOT       gtech           0.000000  u
+U1422                     GTECH_OR2       gtech           0.000000  u
+U1423                     GTECH_AND2      gtech           0.000000  u
+U1424                     GTECH_OR2       gtech           0.000000  u
+U1425                     GTECH_AND2      gtech           0.000000  u
+U1426                     GTECH_NOT       gtech           0.000000  u
+U1427                     GTECH_AND2      gtech           0.000000  u
+U1428                     GTECH_OR2       gtech           0.000000  u
+U1429                     GTECH_NOT       gtech           0.000000  u
+U1430                     GTECH_NOT       gtech           0.000000  u
+U1431                     GTECH_OR2       gtech           0.000000  u
+U1432                     GTECH_AND2      gtech           0.000000  u
+U1433                     GTECH_NOT       gtech           0.000000  u
+U1434                     GTECH_AND2      gtech           0.000000  u
+U1435                     GTECH_AND2      gtech           0.000000  u
+U1436                     GTECH_AND2      gtech           0.000000  u
+U1437                     GTECH_NOT       gtech           0.000000  u
+U1438                     GTECH_AND2      gtech           0.000000  u
+U1439                     GTECH_OR2       gtech           0.000000  u
+U1440                     GTECH_NOT       gtech           0.000000  u
+U1441                     GTECH_AND2      gtech           0.000000  u
+U1442                     GTECH_OR2       gtech           0.000000  u
+U1443                     GTECH_AND2      gtech           0.000000  u
+U1444                     GTECH_AND2      gtech           0.000000  u
+U1445                     GTECH_OR2       gtech           0.000000  u
+U1446                     GTECH_OR2       gtech           0.000000  u
+U1447                     GTECH_NOT       gtech           0.000000  u
+U1448                     GTECH_AND2      gtech           0.000000  u
+U1449                     GTECH_AND2      gtech           0.000000  u
+U1450                     GTECH_NOT       gtech           0.000000  u
+U1451                     GTECH_AND2      gtech           0.000000  u
+U1452                     GTECH_OR2       gtech           0.000000  u
+U1453                     GTECH_AND2      gtech           0.000000  u
+U1454                     GTECH_AND2      gtech           0.000000  u
+U1455                     GTECH_AND2      gtech           0.000000  u
+U1456                     GTECH_NOT       gtech           0.000000  u
+U1457                     GTECH_OR2       gtech           0.000000  u
+U1458                     GTECH_AND2      gtech           0.000000  u
+U1459                     GTECH_AND2      gtech           0.000000  u
+U1460                     GTECH_NOT       gtech           0.000000  u
+U1461                     GTECH_AND2      gtech           0.000000  u
+U1462                     GTECH_OR2       gtech           0.000000  u
+U1463                     GTECH_OR2       gtech           0.000000  u
+U1464                     GTECH_NOT       gtech           0.000000  u
+U1465                     GTECH_OR2       gtech           0.000000  u
+U1466                     GTECH_NOT       gtech           0.000000  u
+U1467                     GTECH_OR2       gtech           0.000000  u
+U1468                     GTECH_NOT       gtech           0.000000  u
+U1469                     GTECH_OR2       gtech           0.000000  u
+U1470                     GTECH_OR2       gtech           0.000000  u
+U1471                     GTECH_OR2       gtech           0.000000  u
+U1472                     GTECH_AND2      gtech           0.000000  u
+U1473                     GTECH_AND2      gtech           0.000000  u
+U1474                     GTECH_AND2      gtech           0.000000  u
+U1475                     GTECH_NOT       gtech           0.000000  u
+U1476                     GTECH_NOT       gtech           0.000000  u
+U1477                     GTECH_OR2       gtech           0.000000  u
+U1478                     GTECH_AND2      gtech           0.000000  u
+U1479                     GTECH_OR2       gtech           0.000000  u
+U1480                     GTECH_OR2       gtech           0.000000  u
+U1481                     GTECH_NOT       gtech           0.000000  u
+U1482                     GTECH_OR2       gtech           0.000000  u
+U1483                     GTECH_OR2       gtech           0.000000  u
+U1484                     GTECH_NOT       gtech           0.000000  u
+U1485                     GTECH_OR2       gtech           0.000000  u
+U1486                     GTECH_NOT       gtech           0.000000  u
+U1487                     GTECH_AND2      gtech           0.000000  u
+U1488                     GTECH_AND2      gtech           0.000000  u
+U1489                     GTECH_NOT       gtech           0.000000  u
+U1490                     GTECH_OR2       gtech           0.000000  u
+U1491                     GTECH_AND2      gtech           0.000000  u
+U1492                     GTECH_OR2       gtech           0.000000  u
+U1493                     GTECH_OR2       gtech           0.000000  u
+U1494                     GTECH_NOT       gtech           0.000000  u
+U1495                     GTECH_OR2       gtech           0.000000  u
+U1496                     GTECH_OR2       gtech           0.000000  u
+U1497                     GTECH_OR2       gtech           0.000000  u
+U1498                     GTECH_NOT       gtech           0.000000  u
+U1499                     GTECH_NOT       gtech           0.000000  u
+U1500                     GTECH_AND2      gtech           0.000000  u
+U1501                     GTECH_AND2      gtech           0.000000  u
+U1502                     GTECH_NOT       gtech           0.000000  u
+U1503                     GTECH_AND2      gtech           0.000000  u
+--------------------------------------------------------------------------------
+Total 767 cells                                           0.000000
+1
+exit
+
+Memory usage for this session 99 Mbytes.
+Memory usage for this session including child processes 99 Mbytes.
+CPU usage for this session 6 seconds ( 0.00 hours ).
+Elapsed time for this session 6 seconds ( 0.00 hours ).
+
+Thank you...
