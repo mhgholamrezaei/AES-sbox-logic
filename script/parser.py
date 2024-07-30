@@ -1,6 +1,5 @@
 from lark import Lark, Transformer, v_args
 import pprint
-from util import bubbleSort
 
 # Define the Transformer class
 class VerilogTransformer(Transformer):
@@ -116,6 +115,39 @@ class Statement():
             return 1
         return 0
 
+def insertItem(items, newItem, j):
+    # Create a copy of the items
+    itemsCpy = items.copy()
+
+    # Handle the case when j is 0
+    if j == 0:
+        return [newItem] + itemsCpy
+
+    # Handle the case when j is the length of the list
+    if j == len(itemsCpy):
+        return itemsCpy + [newItem]
+
+    # Handle the general case
+    return itemsCpy[:j] + [newItem] + itemsCpy[j:]
+
+def insertStatement(newStatement, sortedStatements):
+    for j in range(len(sortedStatements)):
+        comparisonResult = newStatement.compare(sortedStatements[j])
+        if comparisonResult == -1:
+            sortedStatements = insertItem(sortedStatements, newStatement, j)
+            return sortedStatements
+        if comparisonResult == +1:
+            pass
+    sortedStatements.append(newStatement)
+    return sortedStatements
+
+def sortStatements(statements):
+    sortedStatements = []
+    for i in range(len(statements)):
+        newStatement = statements[i]
+        sortedStatements = insertStatement(newStatement = newStatement, sortedStatements = sortedStatements)
+    return sortedStatements
+
 class Wire():
     def __init__(self, name):
         self.name = name
@@ -146,7 +178,7 @@ class Parser():
     def parse(self, inStr):
         self.parseTree = self.larkParser.parse(inStr)
         self.getStatementsList()
-        self.sortStatementList()
+        self.statementList = sortStatements(self.statementList)
         self.getWireList()
         self.getPortList()
         self.getName()
@@ -195,5 +227,3 @@ class Parser():
                 returnList.append(obj)
         return returnList
 
-    def sortStatementList(self):
-        self.statementList = bubbleSort(self.statementList)
